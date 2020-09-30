@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
 
-###
+'''
 Written: September 30, 2020 by Christine Foxx (cfoxx@iastate.edu)
 Checked _R1.fastq and _R2.fastq sequence length == 0.5(file.fastq)
-###
+'''
 
 import os
 import Bio
@@ -16,8 +16,8 @@ def main():
     # Parse arguments
     parser = argparse.ArgumentParser(
         description='''deinterleave.py takes an input directory with paired-end *.fastq file(s) and outputs 2 files containing de-interleaved reads in the format 
-        (*_R1.fastq containing the Illumina 1:N:0 forward reads and *_R2.fastq containing the 2:N:0 reverse reads).''',
-        epilog='''The BioPython cookbook: http://biopython.org/DIST/docs/tutorial/Tutorial.html$sec367''
+        (*_R1.fastq containing forward reads and *_R2.fastq containing reverse reads).''',
+        epilog='''The BioPython cookbook: http://biopython.org/DIST/docs/tutorial/Tutorial.html$sec367'''
     )
     
     parser.add_argument('--input-path', dest='path', required=True,
@@ -41,12 +41,12 @@ def main():
 
             with open(input) as in_handle:
                 for title, seq, qual in FastqGeneralIterator(in_handle):
-                    if "1:N:0" in title:
+                    if "1:N:0" or "/1" in title:
                         fwd_handle.write("@%s\n%s\n+\n%s\n" % (title, seq, qual))
                         fwd_count += 1
                         sys.stdout.write("Saved %i records to %s" % (fwd_count, fwd_short))
                         sys.stdout.flush()
-                    elif "2:N:0" in title:
+                    elif "2:N:0" or "/2" in title:
                         rev_handle.write("@%s\n%s\n+\n%s\n" % (title, seq, qual))
                         rev_count += 1
                         sys.stdout.write("Saved %i records to %s" % (rev_count, rev_short))
