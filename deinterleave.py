@@ -57,7 +57,7 @@ def main():
                         break
             rev_handle.close()
             fwd_handle.close()
-exit(0)
+    exit(0)
 
 if __name__ == "__main__":
     main()
