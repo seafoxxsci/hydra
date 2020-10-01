@@ -29,16 +29,17 @@ def main():
 
     for file in os.listdir(args.path):
         if file.endswith(".fastq"):
-            input_file = args.path + "/" + file
+            path = args.path
+            input_file = path + "/" + file
             fwd_out = input_file.replace(".fastq", "_R1.fastq")
             rev_out = input_file.replace(".fastq", "_R2.fastq")
 
             # Writing out forward and reverse reads as separate files:
             fwd_handle = open(fwd_out, "w")
             rev_handle = open(rev_out, "w")
-            fwd_short = os.args.path.basename(fwd_out)
-            rev_short = os.args.path.basename(rev_out)
-            sys.stdout.write("De-interleaving sequences from %s..." % file)
+            fwd_short = os.path.basename(fwd_out)
+            rev_short = os.path.basename(rev_out)
+            sys.stdout.write("De-interleaving sequences from %s...\n" % file)
             sys.stdout.flush()
             fwd_count = 0
             rev_count = 0
@@ -48,18 +49,18 @@ def main():
                     if "1:N:0" or "/1" in title:
                         fwd_handle.write("@%s\n%s\n+\n%s\n" % (title, seq, qual))
                         fwd_count += 1
-                        sys.stdout.write("Saved %i records to %s\r" % (fwd_count, fwd_short))
+                        sys.stdout.write("Saved %i records to %s\r" % (fwd_count, file))
                         sys.stdout.flush()
                     elif "2:N:0" or "/2" in title:
                         rev_handle.write("@%s\n%s\n+\n%s\n" % (title, seq, qual))
                         rev_count += 1
-                        sys.stdout.write("Saved %i records to %s\r" % (rev_count, rev_short))
-                        sys.stdout.flush()
                     else:
                         raise ValueError("Couldn't de-interleave sequence %s! Are you sure you have paired-end reads \
                         in %s?" % (title, file))
             rev_handle.close()
             fwd_handle.close()
+            sys.stdout.write("Saved %i records to %s\r" % (fwd_count, fwd_short))
+            sys.stdout.write("Saved %i records to %s\r" % (rev_count, rev_short))
     exit(0)
 
 
