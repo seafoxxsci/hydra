@@ -48,12 +48,12 @@ def main():
                     if "1:N:0" or "/1" in title:
                         fwd_handle.write("@%s\n%s\n+\n%s\n" % (title, seq, qual))
                         fwd_count += 1
-                        sys.stdout.write("Saved %i records to %s" % (fwd_count, fwd_short))
+                        sys.stdout.write("Saved %i records to %s\r" % (fwd_count, fwd_short))
                         sys.stdout.flush()
                     elif "2:N:0" or "/2" in title:
                         rev_handle.write("@%s\n%s\n+\n%s\n" % (title, seq, qual))
                         rev_count += 1
-                        sys.stdout.write("Saved %i records to %s" % (rev_count, rev_short))
+                        sys.stdout.write("Saved %i records to %s\r" % (rev_count, rev_short))
                         sys.stdout.flush()
                     else:
                         raise ValueError("Couldn't de-interleave sequence %s! Are you sure you have paired-end reads \
