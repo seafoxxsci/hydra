@@ -1,8 +1,15 @@
 #!/usr/bin/env python3
 
 
+__author__ = "Christine Foxx"
+__copyright__ = "Last updated September 30, 2020"
+__credits__ = ["Christine Foxx"]
+__license__ = "GPL"
+__version__ = "1.0.0-dev"
+__maintainer__ = "Christine Foxx"
+__email__ = "cfoxx@iastate.edu"
+
 '''
-Written: September 30, 2020 by Christine Foxx (cfoxx@iastate.edu)
 Checked _R1.fastq and _R2.fastq sequence length == 0.5(file.fastq)
 '''
 
