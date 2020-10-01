@@ -59,7 +59,7 @@ def main():
                         sys.stdout.write("Saved %i records to %s" % (rev_count, rev_short))
                         sys.stdout.flush()
                     else:
-                        sys.stdout.write("Couldn't de-interleave sequence %s! Are you sure you have paired-end reads in this file?" % title)
+                        raise ValueError("Couldn't de-interleave sequence %s! Are you sure you have paired-end reads in this file?" % title)
                         sys.stdout.flush()
                         break
             rev_handle.close()
