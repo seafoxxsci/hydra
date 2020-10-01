@@ -57,7 +57,7 @@ def main():
                         sys.stdout.flush()
                     else:
                         raise ValueError("Couldn't de-interleave sequence %s! Are you sure you have paired-end reads \
-                        in %s?" % (title, file)
+                        in %s?" % (title, file))
             rev_handle.close()
             fwd_handle.close()
     exit(0)
